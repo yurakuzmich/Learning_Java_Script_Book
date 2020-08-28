@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Planets</title>
+    <style>
+        .redtext { color: red; background: black; }
+    </style>
+    <script>
+        function init() {
+            let planet = document.getElementById('greenplaneta');
+            if (planet) {
+                // Свойство innerHTML содержит текстовое содержимое
+                // элемента, а также всю его вложенную разметку HTML
+                planet.innerHTML = 'Red Alert: hit by phaser fire!';
+                // добавление атрибута элементу
+                planet.setAttribute('class', 'redtext');
+            } else {
+                console.log('Элемент не найден!');
+            }
+        }
+        // способ дождаться загрузки страницы и
+        // построения DOM-дерева перед выполнением JS
+        /*
+        Предположим, должно случиться какое-то большое и важное событие, и вам совер-
+        шенно необходимо о нем узнать. Скажем, речь идет о событии «страница полностью
+        загружена». В таких ситуациях обычно применяются функции обратного вызова,
+        также называемые обработчиками событий.
+        Работа функций обратного вызова основана на том, что вы передаете эту функцию
+        объекту, который знает о событии. При возникновении события объект вызывает
+        полученную функцию, то есть оповещает вас о наступлении события. Это стандарт-
+        ное решение применяется в JavaScript для самых разных событий.
+        */
+        window.onload = init;
+
+    </script>
+</head>
+<body>
+    <h1>Green Planet</h1>
+    <p id="greenplanet">All is well.</p>
+    <h1>Red Planet</h1>
+    <p id="redplanet">Nothing to report.</p>
+    <h1>Blue Planet</h1>
+    <p id="blueplanet">All systems A-OK.</p>
+</body>
+</html>

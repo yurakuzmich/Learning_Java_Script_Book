@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Случайные слова</title>
+    <meta charset="utf-8">
+    <script>
+        function makePhrases() {
+            var words1 = ["ГОРЛЫШКО", "АЛОГИЧНЫЙ", "ВЫКИДКА", "ФОНАРИК", "АППАРАТЧИК"];
+            var words2 = ["ДВУХКОПЕЕЧНИК", "ВСКОЛЬЗЬ", "ШУМЕРСКИЙ", "УМЕЩЕНИЕ", "ЗАДЫ"];
+            var words3 = ["ЗАГНУСИТЬ", "ВЫПРАШИВАТЬ", "ЧЕРКАНУТЬ", "САЛФЕТОЧНЫЙ", "ЗАЖИВЛЕНИЕ"];
+            /* функция Math.random генерирует число от 0 до 1 (не включая 1). Если умножить
+            сгенерированное число на границу массива и отсечь дробную часть вызовом Math.floor,
+            мы получим число в диапазоне от 0 до длины массива, уменьшенной на 1.
+            */
+            var rand1 = Math.floor(Math.random() * words1.length);
+            var rand2 = Math.floor(Math.random() * words2.length);
+            var rand3 = Math.floor(Math.random() * words3.length);
+            var phrase = words1[rand1] + " " + words2[rand2] + " " + words3[rand3];
+            // alert(phrase);
+            document.write(phrase);
+        }
+
+        makePhrases();
+
+    </script>
+</head>
+<body></body>
+</html>

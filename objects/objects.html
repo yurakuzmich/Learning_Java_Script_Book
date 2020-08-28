@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Объекты</title>
+    </head>
+    <body>
+        <script>
+            let chevy = {
+                make: 'Chevy',
+                model: 'Bel Air',
+                year: 1957,
+                color: 'red',
+                passengers: 2
+            };
+
+            let cruze = {
+                make: 'Cruze',
+                model: 'Chevrolet Cruze',
+                year: 2013,
+                color: 'black',
+                passengers: 4,
+                randomAttribute: 'randomAttribute',
+                // !!! создание метода в классе !!!
+                drive: function () {
+                    alert('Машинка едет!!!');
+                }
+            };
+
+            console.log(cruze.model);
+            // добавление нового свойства
+            cruze.status = 'great';
+            console.log(cruze);
+            // удаление свойства
+            delete cruze.randomAttribute;
+            console.log(cruze);
+            cruze.drive();
+
+            function prequal(car) {
+                if (car.year > 1986) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            let isCarYoungerMe = prequal(cruze);
+
+            if(isCarYoungerMe) {
+                console.log('Машина младше тебя!');
+            } else {
+                console.log('Машина старше тебя');
+            }
+
+        </script>
+    </body>
+</html>

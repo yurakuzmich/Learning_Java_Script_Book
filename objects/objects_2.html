@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Объекты 2</title>
+</head>
+<body>
+    <script>
+        var fiat = {
+            make: 'Fiat',
+            model: '500',
+            started: false,
+            fuel: 0,
+            start: function () {
+                if (this.fuel > 0) {
+                    this.started = true;
+                    console.log('Заводим двигатель!');
+                } else {
+                    console.log('Не могу завестись! Состояние топлива: ' + this.fuel);
+                }
+            },
+            stop: function(){
+                this.started = false;
+                console.log('Выключаем двигатель!')
+            },
+            drive: function () {
+                console.log('Двигаетель заведен: ' + fiat['started']);
+                if (this.started) {
+                    if (this.fuel > 0) {
+                        console.log(this.make + ' ' + this.model + ' едет!');
+                        this.fuel -= 1;
+                    } else {
+                        console.log('У машины нет топлива! Нужно заправиться!');
+                        this.stop();
+                    }
+                } else {
+                    console.log('Нужно завести двигатель!');
+                    this.start();
+                }
+            },
+            addFuel: function (amount) {
+                this.fuel += amount;
+                console.log('Заправляем машину на: ' + amount + ' единицы.');
+                console.log('Проверка топлива: ' + fiat['fuel']);
+            }
+        }
+        console.log('Двигаетель заведен: ' + fiat['started']);
+        fiat.start();
+        console.log('Двигаетель заведен: ' + fiat['started']);
+        console.log('Проверка топлива: ' + fiat['fuel']);
+        fiat.drive();
+        fiat.addFuel(2);
+        fiat.drive();
+        fiat.drive();
+        fiat.stop();
+    </script>
+
+</body>
+</html>
