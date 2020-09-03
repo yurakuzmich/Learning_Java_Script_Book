@@ -33,9 +33,9 @@ let model = {
     shipSunk: 0,
     // позиции кораблей и координаты попаданий
     ships: [
-        { locations: ['06', '16', '26'], hits: ['', '', ''] },
-        { locations: ['24', '34', '44'], hits: ['', '', ''] },
-        { locations: ['10', '11', '12'], hits: ['', '', ''] },
+        { locations: ['0', '0', '0'], hits: ['', '', ''] },
+        { locations: ['0', '0', '0'], hits: ['', '', ''] },
+        { locations: ['0', '0', '0'], hits: ['', '', ''] },
     ],
     /*
     Метод получает аргумент с координатами выстрела,
@@ -73,8 +73,88 @@ let model = {
             }
         }
         return true;
+    },
+    /*
+    Создает в модели массив ships с количеством
+    кораблей, определяемым свойством numShips модели
+    */
+    generateShipLocations: function () {
+        let locations;
+
+        for (let i = 0; i < this.numShips; i++) {
+            do {
+                locations = this.generateShip();
+            } while (this.collision(locations));
+            this.ships[i].locations = locations;
+        }
+    },
+    /*
+    метод создает один корабль, находящийся в произвольном месте игрового
+    поля. При этом не исключено перекрытие с другими кораблями
+     */
+    generateShip: function () {
+        let direction = Math.floor(Math.random() * 2);
+        let row, col;
+
+        if (direction === 1) {
+            // генерируем начальную позицию для горизонтального корабля
+            // отнимаем длинну корабля, чтобы осталось место для других клеток корабля
+            row = Math.floor(Math.random() * this.boardSize);
+            col = Math.floor(Math.random() * (this.boardSize - this.shipLength));
+        } else {
+            // генерируем начальную позицию для вертикального корабля
+            // отнимаем длинну корабля, чтобы осталось место для других клеток корабля
+            row = Math.floor(Math.random() * (this.boardSize - this.shipLength));
+            col = Math.floor(Math.random() * this.boardSize);
+        }
+
+        let newShipLocations = [];
+
+        for (let i = 0; i < this.shipLength; i++) {
+            if (direction === 1) {
+                // добавить в массив для горизонтального корабля
+                newShipLocations.push(row + '' + (col + i));
+            } else {
+                // добавить в массив для вертикального корабля
+                newShipLocations.push((row + i) + '' + col);
+            }
+        }
+        // когда все позиции сгенерированы - возвращаем массив
+        return newShipLocations;
+    },
+    /*
+    метод получает один корабль и проверяет, что тот не перекрывается с кораблями,
+    уже находящимися на игровом поле
+    */
+    collision: function(locations) {
+        for (let i = 0; i < this.numShips; i++) {
+            let ship = model.ships[i];
+            for (let j = 0; j < locations.length; j++) {
+                // проверяем, присутствует ли позиция в массиве -
+                // если индекс больше или равен 0 - то клетка уже занята
+                if (ship.locations.indexOf(locations[j]) >= 0) {
+                    return true;
+                }
+            }
+        }
+        // если дошло сюда - ни одна из позиций не была обнаружен в других массивах
+        // поэтому возвращаем false - нет перекрытий по клеткам кораблей
+        return false;
     }
 };
+
+function init() {
+    // получаем ссылку на кнопку Fire по идентификатору кнопки
+    let fireButton = document.getElementById('fireButton');
+    // назначаем кнопке обработчик собития - функцию handleFireButton
+    fireButton.onclick = handleFireButton;
+    // ОБРАБОТКА НАЖАТИЯ КЛАВИШИ ENTER
+    let guessInput = document.getElementById('guessInput');
+    // добавляем новый обработчик событий для клавиши Enter
+    guessInput.onkeypress = handleKeyPress;
+    // генерируем случчайные позиции для кораблей
+    model.generateShipLocations();
+}
 
 // model.fire("53");
 // model.fire("06");
@@ -146,16 +226,6 @@ let controller = {
 // controller.processGuess("B1");
 // controller.processGuess("B2");
 
-function init() {
-    // получаем ссылку на кнопку Fire по идентификатору кнопки
-    let fireButton = document.getElementById('fireButton');
-    // назначаем кнопке обработчик собития - функцию handleFireButton
-    fireButton.onclick = handleFireButton;
-    // ОБРАБОТКА НАЖАТИЯ КЛАВИШИ ENTER
-    let guessInput = document.getElementById('guessInput');
-    // добавляем новый обработчик событий для клавиши Enter
-    guessInput.onkeypress = handleKeyPress;
-}
 // функция будет вызываться при каждом нажатии на кнопку Fire.
 // Кнопка Fire! запускает обработку выстрела, но сами введенные данные содер-
 // жатся в элементе формы “guessInput”. Для получения значения от формы можно
