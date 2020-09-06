@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Guess</title>
+    <style>
+        body {
+            background-color: darkgrey;
+            margin: 20px;
+        }
+        img {
+           margin: 10px;
+        }
+    </style>
+    <script>
+        window.onload = init;
+
+        function init() {
+            /*
+            !!! программа не может получить элемент изображения из DOM,
+            пока загрузка страницы не завершилась!!!
+            */
+            let images = document.getElementsByTagName('img');
+
+            if (images.length > 0) {
+                for (let i = 0; i < images.length; i++) {
+                    // назначаем обработчик события свойству onclick объекта
+                    images[i].onclick = showOriginalImage;
+                }
+            }
+        }
+
+        function showOriginalImage(eventObj) {
+            // Свойство target сообщает, какой элемент сгенерировал данное событие.
+            let image = eventObj.target;
+            let imageName = image.id;
+            imageName = imageName + '.jpg';
+            image.src = imageName;
+        }
+    </script>
+</head>
+<body>
+    <img id="zero" src="zeroblur.jpg" style="border:2px solid black">
+    <img id="one" src="oneblur.jpg" style="border:2px solid black">
+    <img id="two" src="twoblur.jpg" style="border:2px solid black">
+    <img id="three" src="threeblur.jpg" style="border:2px solid black">
+    <img id="four" src="fourblur.jpg" style="border:2px solid black">
+    <img id="five" src="fiveblur.jpg" style="border:2px solid black">
+</body>
+</html>
