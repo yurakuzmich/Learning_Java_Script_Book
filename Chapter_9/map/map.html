@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Пиратская карта</title>
+  <script>
+	window.onload = init;
+
+	function init() {
+		let map = document.getElementById("map");
+		// onmousemove - событие перемещения мыши
+		map.onmousemove = showCoords;
+	}
+	
+	function showCoords(eventObj) {
+		let coords = document.getElementById("coords");
+		// clientX, clientY - смещение (в пикселях) указателя мыши
+		let x = eventObj.clientX;
+		let y = eventObj.clientY;
+		coords.innerHTML = "Координаты на карте: " + x + ", " + y;
+	}
+  </script>
+</head>
+<body>
+	<img id="map" src="map.jpg">
+	<p id="coords">Двигайте мышью по карте, чтобы определить координаты...</p>
+</body>
+</html>

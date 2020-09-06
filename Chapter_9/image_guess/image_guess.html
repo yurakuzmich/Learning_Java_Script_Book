@@ -26,6 +26,8 @@
                 for (let i = 0; i < images.length; i++) {
                     // назначаем обработчик события свойству onclick объекта
                     images[i].onclick = showOriginalImage;
+                    // назначаем обработчик события при наведении мыши на объекта свойству onmouseover объекта
+                    // images[i].onmouseover = showOriginalImage;
                 }
             }
         }
@@ -35,6 +37,14 @@
             let image = eventObj.target;
             let imageName = image.id;
             imageName = imageName + '.jpg';
+            image.src = imageName;
+            // закрываем фото через 2 секунды
+            setTimeout(reblur, 2000, image)
+        }
+
+        function reblur(image) {
+            let imageName = image.id;
+            imageName = imageName + 'blur.jpg';
             image.src = imageName;
         }
     </script>
