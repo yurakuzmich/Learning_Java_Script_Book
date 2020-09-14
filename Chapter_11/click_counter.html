@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Счетчик кликов (без замыканий)</title>
+        <style>
+            body, button { margin: 10px; }
+            div { padding: 10px; }
+        </style>
+        <script>
+            let count = 0;
+
+            window.onload = function () {
+                let button = document.getElementById('click_button');
+                button.onclick = handleClick;
+            }
+
+            function handleClick() {
+                let message = 'Ты нажал на кнопку ';
+                let divMessage = document.getElementById('message');
+                count++;
+                divMessage.innerHTML = message + count + ' раз!';
+            }
+        </script>
+    </head>
+    <body>
+        <button id="click_button">Нажми меня!</button>
+        <div id="message"></div>
+    </body>
+</html>
