@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Конструктор объектов</title>
+</head>
+<script>
+    // Конструктор объектов
+    function Dog(name, breed, weight) {
+        this.name = name;
+        this.breed = breed;
+        this.weight = weight;
+        // метод
+        this.bark = function () {
+            if (this.weight > 25) {
+                document.write(this.name + ' сказал ГАВ!');
+            } else {
+                document.write(this.name + ' сказал тяф.')
+            }
+        };
+    }
+    // экземпляр объекта создается с помощью оператора new  (стр. 546)
+    let fido = new Dog("Fido", "Mixed", 38);
+    let fluffy = new Dog("Fluffy", "Poodle", 30);
+    let spot = new Dog("Spot", "Chihuahua", 10);
+
+    let dogs = [fido, fluffy, spot]
+
+    for (let i = 0; i < dogs.length; i++) {
+        let size = 'маленькая';
+
+        if (dogs[i].weight > 10) {
+            size = 'большая';
+        }
+        document.write('<h1>Собака по имени ' + dogs[i].name + ' породы ' + dogs[i].breed + ' ' + size + '.<br>')
+        dogs[i].bark();
+    }
+</script>
+<body>
+
+</body>
+</html>
