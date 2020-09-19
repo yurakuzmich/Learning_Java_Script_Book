@@ -32,9 +32,22 @@
         if (dogs[i].weight > 10) {
             size = 'большая';
         }
-        document.write('<h1>Собака по имени ' + dogs[i].name + ' породы ' + dogs[i].breed + ' ' + size + '.<br>')
+        document.write('<h1>Собака по имени ' + dogs[i].name + ' породы ' + dogs[i].breed + ' ' + size + '.<br><br>')
         dogs[i].bark();
     }
+
+    let now = new Date();
+    document.write('<br><br> now = ', now + '<br>');
+
+    let dateString = now.toString();
+    document.write('dateString = ', dateString + '<br>');
+
+    let theYear = now.getFullYear();
+    document.write('theYear = ', theYear + '<br>');
+
+    let theDayOfWeek = now.getDay();
+    document.write('theDayOfWeek = ', theDayOfWeek + '<br>');
+
 </script>
 <body>
 
